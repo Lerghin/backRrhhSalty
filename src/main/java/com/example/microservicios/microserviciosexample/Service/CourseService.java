@@ -38,7 +38,7 @@ public class CourseService implements ICourseService  {
 
     @Override
     public void editCourse(Courses course) {
-        curRepo.save(course)
+        curRepo.save(course);
 
     }
 }

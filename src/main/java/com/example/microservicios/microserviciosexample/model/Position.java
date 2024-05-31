@@ -1,5 +1,6 @@
 package com.example.microservicios.microserviciosexample.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,9 +18,10 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private  Long idPosition;
-    private String PositionApp;
+    private String positionApp;
     private Double salary;
-    private String Disponibility;
+    private String disponibility;
     @OneToOne
+    @JsonIgnore
     private Applicant applicant;
 }

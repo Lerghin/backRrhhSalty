@@ -21,13 +21,33 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public AuthResponse login(LoginRequest request){
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails userDetails= userRepository.findByUsername(request.getUsername()).orElseThrow();
-        String token= jwtService.getToken(userDetails);
-        return  AuthResponse.builder()
-                .token(token).
-                build();
+    public AuthResponse login(LoginRequest request) {
+        if (request.getUsername() == null || request.getUsername().isEmpty() ||
+                request.getPassword() == null || request.getPassword().isEmpty()) {
+            throw new GlobalExceptionHandler.MissingDataException("Username or password is missing");
+        }
+
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+            );
+        } catch (Exception e) {
+            throw new GlobalExceptionHandler.InvalidCredentialsException("Invalid username or password");
+        }
+
+        UserDetails userDetails = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new GlobalExceptionHandler.InvalidCredentialsException("User not found"));
+        String token = jwtService.getToken(userDetails);
+
+       String role= userDetails.getAuthorities().stream().findFirst().orElseThrow().getAuthority();
+
+
+
+
+        return AuthResponse.builder()
+                .token(token)
+                .role(role)
+                .build();
     }
 
 
@@ -56,8 +76,12 @@ public class AuthService {
                 .nationality(nationality) // Asignar la nacionalidad proporcionada
                 .build();
         userRepository.save(user);
+        String role= user.getRole().toString();
+        String id= user.getId().toString();
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
+                .role(role)
+                .id(id)
                 .build();
     }
 
@@ -86,8 +110,10 @@ public class AuthService {
                 .nationality(nationality) // Asignar la nacionalidad proporcionada
                 .build();
         userRepository.save(user);
+        String role= user.getRole().toString();
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
+                .role(role)
                 .build();
     }
 

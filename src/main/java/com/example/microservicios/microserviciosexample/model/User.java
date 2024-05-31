@@ -1,5 +1,6 @@
 package com.example.microservicios.microserviciosexample.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,9 +31,13 @@ public class User implements UserDetails {
     private Integer cedula;
     @Column(nullable = false)
     private String password;
+    @OneToOne
+    @JoinColumn(name = "applicant_id")
+    @JsonIgnore
+    private Applicant applicant;
 
     @Enumerated(EnumType.STRING)
-    Role role;
+    private  Role role;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Nationality nationality;

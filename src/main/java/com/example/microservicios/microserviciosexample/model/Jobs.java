@@ -1,6 +1,7 @@
 package com.example.microservicios.microserviciosexample.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +35,7 @@ public class Jobs {
     private LocalDate endDate;
     private String reason;
     @ManyToOne
+    @JsonIgnore
     private Applicant applicant;
 
 

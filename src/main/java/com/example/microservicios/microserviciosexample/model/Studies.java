@@ -1,5 +1,6 @@
 package com.example.microservicios.microserviciosexample.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class Studies {
     private String description;
 
     @ManyToOne
+    @JsonIgnore
      private Applicant applicant;
 
 }

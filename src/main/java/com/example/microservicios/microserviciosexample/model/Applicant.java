@@ -1,5 +1,6 @@
 package com.example.microservicios.microserviciosexample.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+
+import static org.hibernate.annotations.OnDeleteAction.CASCADE;
 
 
 @Entity
@@ -31,7 +34,7 @@ public class Applicant {
 
     private Nationality  nationality;
 
-    @Column(unique = true, nullable = false)
+
     private String dniType;
 
     @Column(nullable = false)
@@ -65,6 +68,9 @@ public class Applicant {
 
     @OneToOne(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private Position position;
+    @OneToOne
+    private User user;
+
 
     public int getEdad(){
         LocalDate nowDate= LocalDate.now();

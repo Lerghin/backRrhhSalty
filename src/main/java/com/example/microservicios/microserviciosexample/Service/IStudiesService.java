@@ -1,7 +1,6 @@
 package com.example.microservicios.microserviciosexample.Service;
 
 import com.example.microservicios.microserviciosexample.model.Studies;
-import com.example.microservicios.microserviciosexample.model.User;
 
 import java.util.List;
 
@@ -11,8 +10,8 @@ public interface IStudiesService {
 
     public void deleteStudy(Long idStudy);
 
-    public  User findStudy(Long idStudy);
+    public  Studies findStudy(Long idStudy);
 
-    public void editStudy( Studies study);
+    public Studies editStudy(Long idStudy, Studies study);
 
 }

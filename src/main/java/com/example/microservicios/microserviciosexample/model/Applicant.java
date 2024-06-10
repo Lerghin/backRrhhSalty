@@ -25,26 +25,26 @@ public class Applicant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idApplicant;
     @Column(nullable = false)
-    private String firstname;
-    private String secondname;
+    private String firstName;
+    private String secondName;
 
     @Column(nullable = false)
-    private String lastname;
-    private String lastname2;
+    private String lastName;
+    private String lastName2;
 
     private Nationality  nationality;
 
 
     private String dniType;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Integer cedula;
 
     private Sexo sexo;
 
     @Column(nullable = false)
     private LocalDate birthDate;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -66,10 +66,13 @@ public class Applicant {
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Courses> coursesList ;
 
+
     @OneToOne(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private Position position;
     @OneToOne
     private User user;
+    @ManyToMany(mappedBy = "aplicantList")  // Nombre de la lista en la clase Vacante
+    private List<Vacante> vacantes;
 
 
     public int getEdad(){

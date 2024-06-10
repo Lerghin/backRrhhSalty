@@ -15,4 +15,6 @@ public interface IApplicanService {
 
     public Applicant editApp(Long idApplicant, Applicant applicant);
 
+
+
 }

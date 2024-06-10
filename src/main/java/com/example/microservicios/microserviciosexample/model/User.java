@@ -25,7 +25,7 @@ public class User implements UserDetails {
     private Long id;
     @Column(nullable = false)
     private String username;
-    private String firtsName;
+    private String firstName;
     private String lastName;
     @Column(unique= true)
     private Integer cedula;

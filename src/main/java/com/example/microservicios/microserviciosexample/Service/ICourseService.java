@@ -1,7 +1,6 @@
 package com.example.microservicios.microserviciosexample.Service;
 
 import com.example.microservicios.microserviciosexample.model.Courses;
-import com.example.microservicios.microserviciosexample.model.User;
 
 import java.util.List;
 
@@ -13,6 +12,6 @@ public interface ICourseService {
 
     public  Courses findCourse(Long idCourse);
 
-    public void editCourse( Courses course);
+    public Courses editCourse(Long idCourse, Courses course);
 
 }

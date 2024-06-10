@@ -1,7 +1,6 @@
 package com.example.microservicios.microserviciosexample.Service;
 
 import com.example.microservicios.microserviciosexample.model.Jobs;
-import com.example.microservicios.microserviciosexample.model.User;
 
 import java.util.List;
 
@@ -13,6 +12,6 @@ public interface IJobsServicce {
 
     public  Jobs findJob(Long idJob);
 
-    public void editJob( Jobs job);
+    public Jobs editJob(Long idJob, Jobs job);
 
 }

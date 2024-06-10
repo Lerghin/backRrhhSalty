@@ -30,7 +30,7 @@ public class ApplicantController {
     }
 
     @PostMapping("/app/create")
-    public ResponseEntity<?> createApp(@RequestBody Applicant app){
+    public ResponseEntity<?> createApp(@RequestBody Applicant app) {
         try {
 
             apliServ.createApplicant(app);
@@ -42,7 +42,8 @@ public class ApplicantController {
         }
     }
 
-    @DeleteMapping("/app/borrar/{idApplicant}")
+
+        @DeleteMapping("/app/borrar/{idApplicant}")
     public String deleteApp(@PathVariable Long idApplicant){
         apliServ.deleteApplicant(idApplicant);
         return "fue borrado el Aplicant ";

@@ -21,6 +21,10 @@ public class AplicantService implements  IApplicanService{
     private ICoursesRepository cuRepo;
     @Autowired
     private IJobsRepository jobRepo;
+
+    @Autowired
+    private IUserRepository userRepo;
+
     @Override
     public List<Applicant> getApplicants() {
 
@@ -31,42 +35,66 @@ public class AplicantService implements  IApplicanService{
 
     @Transactional
     public Applicant createApplicant(Applicant applicant) {
-        // Guardar el solicitante principal
-        Applicant savedApplicant = appRepo.save(applicant);
-
-        // Guardar estudios y asociarlos con el solicitante
-        if (savedApplicant.getStudiesList() != null) {
-            for (Studies studies : savedApplicant.getStudiesList()) {
-                studies.setApplicant(savedApplicant);
-                studRepo.save(studies);
+        try {
+            // Verificar si ya existe un solicitante con la misma cédula
+            if (applicant.getCedula() != null && appRepo.existsByCedula(applicant.getCedula())) {
+                throw new RuntimeException("Ya existe un solicitante registrado con esta cédula");
             }
-        }
 
-        // Guardar trabajos y asociarlos con el solicitante
-        if (savedApplicant.getJobsList() != null) {
-            for (Jobs jobs : savedApplicant.getJobsList()) {
-                jobs.setApplicant(savedApplicant);
-                jobRepo.save(jobs);
+            // Verificar si ya existe un solicitante con el mismo correo electrónico
+            if (applicant.getEmail() != null && appRepo.existsByEmail(applicant.getEmail())) {
+                throw new RuntimeException("Ya existe un solicitante registrado con este correo electrónico");
             }
-        }
 
-        // Guardar cursos y asociarlos con el solicitante
-        if (savedApplicant.getCoursesList() != null) {
-            for (Courses courses : savedApplicant.getCoursesList()) {
-                courses.setApplicant(savedApplicant);
-                cuRepo.save(courses);
+            // Guardar el solicitante principal
+            Applicant savedApplicant = appRepo.save(applicant);
+
+            // Guardar estudios y asociarlos con el solicitante
+            if (savedApplicant.getStudiesList() != null) {
+                for (Studies studies : savedApplicant.getStudiesList()) {
+                    studies.setApplicant(savedApplicant);
+                    studRepo.save(studies);
+                }
             }
-        }
 
-        // Guardar la posición y asociarla con el solicitante
-        if (savedApplicant.getPosition() != null) {
-            Position position = savedApplicant.getPosition();
-            position.setApplicant(savedApplicant);
-            poRepo.save(position);
-        }
+            // Guardar trabajos y asociarlos con el solicitante
+            if (savedApplicant.getJobsList() != null) {
+                for (Jobs jobs : savedApplicant.getJobsList()) {
+                    jobs.setApplicant(savedApplicant);
+                    jobRepo.save(jobs);
+                }
+            }
 
-        return savedApplicant;
+            // Guardar cursos y asociarlos con el solicitante
+            if (savedApplicant.getCoursesList() != null) {
+                for (Courses courses : savedApplicant.getCoursesList()) {
+                    courses.setApplicant(savedApplicant);
+                    cuRepo.save(courses);
+                }
+            }
+
+            // Guardar la posición y asociarla con el solicitante
+            if (savedApplicant.getPosition() != null) {
+                Position position = savedApplicant.getPosition();
+                position.setApplicant(savedApplicant);
+                poRepo.save(position);
+            }
+
+            // Si se especifica un usuario, actualizar el campo applicant sin modificar otros campos
+            if (savedApplicant.getUser() != null) {
+                Long userId = savedApplicant.getUser().getId();
+                User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + userId));
+                user.setApplicant(savedApplicant);
+                user.setRole(savedApplicant.getUser().getRole());
+                userRepo.save(user);
+            }
+
+            return savedApplicant;
+        } catch (Exception e) {
+            throw new RuntimeException("Error al crear el solicitante: " + e.getMessage(), e);
+        }
     }
+
 
 
     @Override
@@ -85,10 +113,10 @@ public class AplicantService implements  IApplicanService{
             Applicant aplicantFind = this.findApp(idApplicant);
 
 
-            aplicantFind.setFirstname(applicant.getFirstname());
-            aplicantFind.setSecondname(applicant.getSecondname());
-            aplicantFind.setLastname(applicant.getLastname());
-            aplicantFind.setLastname2(aplicantFind.getLastname2());
+            aplicantFind.setFirstName(applicant.getFirstName());
+            aplicantFind.setSecondName(applicant.getSecondName());
+            aplicantFind.setLastName(applicant.getLastName());
+            aplicantFind.setLastName2(aplicantFind.getLastName2());
             aplicantFind.setSexo(applicant.getSexo());
             aplicantFind.setState(applicant.getState());
             aplicantFind.setParish(applicant.getParish());
@@ -110,6 +138,8 @@ public class AplicantService implements  IApplicanService{
             throw new RuntimeException("Error al editar el aplicante", e);
         }
     }
+
+
 
     @Transactional
     public void deleteApplicant(Long idApplicant) {

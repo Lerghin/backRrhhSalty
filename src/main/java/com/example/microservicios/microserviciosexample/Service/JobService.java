@@ -1,12 +1,13 @@
 package com.example.microservicios.microserviciosexample.Service;
 
 import com.example.microservicios.microserviciosexample.model.Jobs;
-import com.example.microservicios.microserviciosexample.model.User;
 import com.example.microservicios.microserviciosexample.repository.IJobsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class JobService implements IJobsServicce{
     @Autowired
     private IJobsRepository jobRepo;
@@ -34,7 +35,9 @@ public class JobService implements IJobsServicce{
     }
 
     @Override
-    public void editJob(Jobs job) {
+    public Jobs editJob(Long idJob, Jobs job) {
+
     jobRepo.save(job);
+        return job;
     }
 }

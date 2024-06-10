@@ -69,7 +69,7 @@ public class AuthService {
         User user= User.builder()
                 .username(request.username)
                 .password(passwordEncoder.encode(request.password))
-                .firtsName(request.firstName)
+                .firstName(request.firstName)
                 .lastName(request.lastName)
                 .cedula(request.cedula)
                 .role(Role.USER)
@@ -103,7 +103,7 @@ public class AuthService {
         User user= User.builder()
                 .username(request.username)
                 .password(passwordEncoder.encode(request.password))
-                .firtsName(request.firstName)
+                .firstName(request.firstName)
                 .lastName(request.lastName)
                 .cedula(request.cedula)
                 .role(Role.ADMIN)
@@ -111,9 +111,11 @@ public class AuthService {
                 .build();
         userRepository.save(user);
         String role= user.getRole().toString();
+        String id= user.getId().toString();
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
                 .role(role)
+                .id(id)
                 .build();
     }
 

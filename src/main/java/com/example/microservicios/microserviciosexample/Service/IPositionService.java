@@ -1,7 +1,6 @@
 package com.example.microservicios.microserviciosexample.Service;
 
 import com.example.microservicios.microserviciosexample.model.Position;
-import com.example.microservicios.microserviciosexample.model.User;
 
 import java.util.List;
 
@@ -13,6 +12,6 @@ public interface IPositionService {
 
     public  Position findPosition(Long idPosition);
 
-    public void editPosition( Position position);
+    public Position editPosition(Position position);
 
 }

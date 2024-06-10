@@ -1,7 +1,6 @@
 package com.example.microservicios.microserviciosexample.Service;
 
 import com.example.microservicios.microserviciosexample.model.Courses;
-import com.example.microservicios.microserviciosexample.model.User;
 import com.example.microservicios.microserviciosexample.repository.ICoursesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +36,15 @@ public class CourseService implements ICourseService  {
     }
 
     @Override
-    public void editCourse(Courses course) {
+    public Courses editCourse(Long idCourse, Courses course) {
+        Courses cur=this.findCourse(idCourse);
+        cur.setIdCourse(idCourse);
+        cur.setApplicant(course.getApplicant());
+        cur.setNameCourse(course.getNameCourse());
+        cur.setDate(course.getDate());
+        cur.setNameInstitution(course.getNameInstitution());
         curRepo.save(course);
 
+        return cur;
     }
 }

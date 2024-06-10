@@ -1,12 +1,13 @@
 package com.example.microservicios.microserviciosexample.Service;
 
 import com.example.microservicios.microserviciosexample.model.Position;
-import com.example.microservicios.microserviciosexample.model.User;
 import com.example.microservicios.microserviciosexample.repository.IPositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PositionService implements IPositionService{
     @Autowired
     private IPositionRepository poRepo;
@@ -33,7 +34,8 @@ public class PositionService implements IPositionService{
     }
 
     @Override
-    public void editPosition(Position position) {
+    public Position editPosition(Position position) {
     poRepo.save(position);
+        return position;
     }
 }

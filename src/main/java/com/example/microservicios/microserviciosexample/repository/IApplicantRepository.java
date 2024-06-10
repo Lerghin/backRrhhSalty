@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IApplicantRepository extends JpaRepository<Applicant, Long> {
+
+    boolean existsByCedula(Integer cedula);
+
+    boolean existsByEmail(String email);
 }

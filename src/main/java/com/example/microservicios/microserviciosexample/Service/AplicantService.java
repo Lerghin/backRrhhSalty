@@ -100,9 +100,24 @@ public class AplicantService implements  IApplicanService{
     @Override
     public Applicant findApp(Long idApplicant) {
         Applicant applicant= appRepo.findById(idApplicant).orElseThrow(null);
-        return  applicant;
+       return applicant;
+    }
+    @Override
+    public List<Studies> getStudiesByApplicantId(Long idApplicant) {
+        Applicant applicant = this.findApp(idApplicant);
+        return applicant.getStudiesList();
+    }
 
+    @Override
+    public List<Jobs> getJobsByApplicantId(Long idApplicant) {
+        Applicant applicant = this.findApp(idApplicant);
+        return applicant.getJobsList();
+    }
 
+    @Override
+    public List<Courses> getCoursesByApplicantId(Long idApplicant) {
+        Applicant applicant = this.findApp(idApplicant);
+        return applicant.getCoursesList();
     }
 
 

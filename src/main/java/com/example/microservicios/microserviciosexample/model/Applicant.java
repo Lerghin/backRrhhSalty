@@ -60,18 +60,25 @@ public class Applicant {
     private String municipality;
 
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Studies> studiesList;
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Jobs> jobsList;
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Courses> coursesList ;
 
 
     @OneToOne(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Position position;
+
     @OneToOne
+    @JsonIgnore
     private User user;
-    @ManyToMany(mappedBy = "aplicantList")  // Nombre de la lista en la clase Vacante
+    @ManyToMany(mappedBy = "aplicantList")
+    @JsonIgnore
     private List<Vacante> vacantes;
 
 

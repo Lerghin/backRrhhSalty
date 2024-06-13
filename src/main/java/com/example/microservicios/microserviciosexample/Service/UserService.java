@@ -4,6 +4,7 @@ import com.example.microservicios.microserviciosexample.model.User;
 import com.example.microservicios.microserviciosexample.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,10 +25,13 @@ public class UserService implements  IUserService {
 
     }
 
-    @Override
+    @Transactional
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        // Busca al usuario por ID
+        User user = this.findUSer(id);
 
+        // Elimina el usuario y, debido a la configuración de cascade y orphanRemoval, también eliminará el Applicant asociado
+        userRepository.delete(user);
     }
 
     @Override

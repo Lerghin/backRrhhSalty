@@ -1,5 +1,7 @@
 package com.example.microservicios.microserviciosexample.Service;
 
+
+import com.example.microservicios.microserviciosexample.model.Applicant;
 import com.example.microservicios.microserviciosexample.model.Vacante;
 
 import java.util.List;
@@ -13,6 +15,7 @@ public  interface IVacannteService {
     public  Vacante findVacante(Long id);
 
     public Vacante editVacante(Long id, Vacante vacante);
+    public List<Applicant> getApplicantsByVacanteId(Long id);
 
 
 }

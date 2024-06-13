@@ -2,11 +2,15 @@ package com.example.microservicios.microserviciosexample.controller;
 
 import com.example.microservicios.microserviciosexample.Service.*;
 import com.example.microservicios.microserviciosexample.model.Applicant;
+import com.example.microservicios.microserviciosexample.model.Courses;
+import com.example.microservicios.microserviciosexample.model.Jobs;
+import com.example.microservicios.microserviciosexample.model.Studies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +29,39 @@ public class ApplicantController {
     }
     @GetMapping("/applicants/traer/{idApplicant}")
     public  Applicant findApp(@PathVariable Long idApplicant){
-
-        return apliServ.findApp(idApplicant);
+        Applicant app= apliServ.findApp(idApplicant);
+        return app;
     }
+    @GetMapping("/applicants/studies/{idApplicant}")
+    public ResponseEntity<?> findStudy(@PathVariable Long idApplicant) {
+        List<Studies> studiesList = apliServ.getStudiesByApplicantId(idApplicant);
+        if (studiesList == null || studiesList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El solicitante con ID " + idApplicant + " no tiene estudios registrados.");
+        }
+        return ResponseEntity.ok(studiesList);
+    }
+
+    @GetMapping("/applicants/jobs/{idApplicant}")
+    public ResponseEntity<?> findJob(@PathVariable Long idApplicant) {
+        List<Jobs> jobsList = apliServ.getJobsByApplicantId(idApplicant);
+        if (jobsList == null || jobsList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El solicitante con ID " + idApplicant + " no tiene trabajos registrados.");
+        }
+        return ResponseEntity.ok(jobsList);
+    }
+
+    @GetMapping("/applicants/courses/{idApplicant}")
+    public ResponseEntity<?> findCourses(@PathVariable Long idApplicant) {
+        List<Courses> coursesList = apliServ.getCoursesByApplicantId(idApplicant);
+        if (coursesList == null || coursesList.isEmpty()) {
+            return ResponseEntity.ok(Collections.emptyList()); // Devuelve una lista vacía si no hay cursos
+        }
+
+        return ResponseEntity.ok(coursesList);
+    }
+
 
     @PostMapping("/app/create")
     public ResponseEntity<?> createApp(@RequestBody Applicant app) {

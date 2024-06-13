@@ -24,6 +24,7 @@ public class Vacante {
     private LocalDate fecha;
     private String nombreVacante;
     private Integer cantidadDisponible;
+    private Integer cantidadCubierta;
     private String status;
 
     @ManyToMany

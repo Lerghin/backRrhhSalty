@@ -31,10 +31,11 @@ public class User implements UserDetails {
     private Integer cedula;
     @Column(nullable = false)
     private String password;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "applicant_id")
     @JsonIgnore
     private Applicant applicant;
+
 
     @Enumerated(EnumType.STRING)
     private  Role role;

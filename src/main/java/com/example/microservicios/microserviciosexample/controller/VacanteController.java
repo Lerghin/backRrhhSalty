@@ -1,7 +1,10 @@
 package com.example.microservicios.microserviciosexample.controller;
 
+
+import com.example.microservicios.microserviciosexample.Service.IApplicanService;
 import com.example.microservicios.microserviciosexample.Service.IJobsServicce;
 import com.example.microservicios.microserviciosexample.Service.IVacannteService;
+import com.example.microservicios.microserviciosexample.model.Applicant;
 import com.example.microservicios.microserviciosexample.model.Jobs;
 import com.example.microservicios.microserviciosexample.model.Vacante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ import java.util.List;
 public class VacanteController {
     @Autowired
     private IVacannteService vacaServ;
+    @Autowired
+    private IApplicanService appServ;
+
 
 
     @GetMapping("/vacant/get")
@@ -27,6 +33,11 @@ public class VacanteController {
     public  Vacante findVac(@PathVariable Long id){
 
         return  vacaServ.findVacante(id);
+    }
+    @GetMapping("/vacante/applicant/{id}")
+    public List<Applicant>  getApplicantsByVacanteId(@PathVariable Long id){
+
+        return vacaServ.getApplicantsByVacanteId(id);
     }
 
     @PostMapping("/vacant/create")

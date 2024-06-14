@@ -21,5 +21,7 @@ public interface IApplicanService {
     public List<Studies> getStudiesByApplicantId(Long idApplicant);
     public List<Jobs> getJobsByApplicantId(Long idApplicant);
     public List<Courses> getCoursesByApplicantId(Long idApplicant);
+    public void AppAplicacion(Long idApplicant, Long idVacante);
+    public Applicant saveApplicant(Applicant applicant);
 
 }

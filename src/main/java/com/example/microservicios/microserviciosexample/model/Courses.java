@@ -20,9 +20,13 @@ public class Courses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long idCourse;
+    @Column(columnDefinition = "TEXT")
     private String nameCourse;
     private LocalDate date;
+    @Column(columnDefinition = "TEXT")
     private String nameInstitution;
+
+
 
     @ManyToOne
     @JsonIgnore

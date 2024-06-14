@@ -16,9 +16,11 @@ public class Studies {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  idStudy;
     private String institutionName;
+    @Column(columnDefinition = "TEXT")
     private String degree;
     private LocalDate startDate;
     private LocalDate endDate;
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne

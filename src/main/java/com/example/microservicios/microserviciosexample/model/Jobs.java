@@ -20,19 +20,23 @@ public class Jobs {
 
     private Long idJob;
 
+
     private  String jobName;
 
+    @Column(columnDefinition = "TEXT")
     private String address;
 
     private String phone;
 
     private String position;
     private Integer peopleSubordinated;
+    @Column(columnDefinition = "TEXT")
     private String positionBoss;
-
+    @Column(columnDefinition = "TEXT")
     private String description;
     private LocalDate startDate;
     private LocalDate endDate;
+    @Column(columnDefinition = "TEXT")
     private String reason;
     @ManyToOne
     @JsonIgnore

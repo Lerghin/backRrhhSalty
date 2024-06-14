@@ -26,7 +26,6 @@ public class AplicationConfig {
                        authRequest
                                .requestMatchers("/auth/**").permitAll()
                                .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                               .requestMatchers("/user/**").hasAnyAuthority("USER")
                                .anyRequest().authenticated()
                 ).sessionManagement(sessionManager->
                         sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

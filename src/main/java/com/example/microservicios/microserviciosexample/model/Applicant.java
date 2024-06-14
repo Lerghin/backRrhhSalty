@@ -51,34 +51,31 @@ public class Applicant {
     private String cellphone1;
     private String cellphone2;
     private String country;
+    private String nombreDeProfesion;
+
+    @Column(columnDefinition = "TEXT")
     private String address;
 
+    @Column(columnDefinition = "TEXT")
     private String state;
+
 
     private String parish;
 
     private String municipality;
+    private Double salary;
+    private String disponibility;
 
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Studies> studiesList;
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Jobs> jobsList;
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Courses> coursesList ;
 
-
-    @OneToOne(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Position position;
-
     @OneToOne
-    @JsonIgnore
     private User user;
     @ManyToMany(mappedBy = "aplicantList")
-    @JsonIgnore
     private List<Vacante> vacantes;
 
 

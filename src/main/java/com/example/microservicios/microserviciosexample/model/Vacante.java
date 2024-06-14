@@ -26,7 +26,10 @@ public class Vacante {
     private Integer cantidadDisponible;
     private Integer cantidadCubierta;
     private String status;
-
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+    @Column(columnDefinition = "TEXT")
+    private String requisitos;
     @ManyToMany
     @JoinTable(
             name = "vacante_applicant",  // Nombre de la tabla de unión

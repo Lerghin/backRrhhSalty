@@ -50,6 +50,15 @@ public class ApplicantController {
         }
         return ResponseEntity.ok(jobsList);
     }
+    @GetMapping("/applicants/users/{idApplicant}")
+    public ResponseEntity<?> findUser(@PathVariable Long idApplicant) {
+        User user= apliServ.getUser(idApplicant);
+        if (user == null || user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("El solicitante con ID " + idApplicant + " no tiene trabajos registrados.");
+        }
+        return ResponseEntity.ok(user);
+    }
 
     @GetMapping("/applicants/courses/{idApplicant}")
     public ResponseEntity<?> findCourses(@PathVariable Long idApplicant) {
@@ -65,6 +74,7 @@ public class ApplicantController {
     @PostMapping("/app/create")
     public ResponseEntity<?> createApp(@RequestBody Applicant app) {
         try {
+
             Applicant createdApplicant = apliServ.createApplicant(app);
             return new ResponseEntity<>(createdApplicant, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -82,10 +92,10 @@ public class ApplicantController {
 
     }
 
-    @PutMapping("/app/editar/{idApplicant}")
-    public ResponseEntity<Applicant> editAplicant(@PathVariable Long idApplicant, @RequestBody Applicant app) {
+    @PutMapping("/app/editar")
+    public ResponseEntity<Applicant> editAplicant( @RequestBody Applicant app) {
         try {
-            Applicant updatedApplicant = apliServ.editApp(idApplicant, app);
+            Applicant updatedApplicant = apliServ.editApp( app);
             return ResponseEntity.ok(updatedApplicant);
         } catch (RuntimeException e) {
             // Manejar el error y retornar un ResponseEntity con un mensaje descriptivo

@@ -72,7 +72,6 @@ public class Applicant {
     private List<Jobs> jobsList;
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Courses> coursesList ;
-
     @OneToOne
     private User user;
     @ManyToMany(mappedBy = "aplicantList")

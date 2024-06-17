@@ -40,6 +40,9 @@ public class AuthService {
         String token = jwtService.getToken(userDetails);
 
        String role= userDetails.getAuthorities().stream().findFirst().orElseThrow().getAuthority();
+       User user= userRepository.findByUsername(request.getUsername()).orElseThrow(null);
+       String id= user.getId().toString();
+
 
 
 
@@ -47,6 +50,7 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(token)
                 .role(role)
+                .id(id)
                 .build();
     }
 

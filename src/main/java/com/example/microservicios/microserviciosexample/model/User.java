@@ -31,9 +31,9 @@ public class User implements UserDetails {
     private Integer cedula;
     @Column(nullable = false)
     private String password;
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name = "applicant_id")
-    @JsonIgnore
+    @JsonIgnore()
     private Applicant applicant;
 
 
@@ -77,5 +77,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean isEmpty() {
+        return false;
     }
 }

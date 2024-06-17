@@ -2,6 +2,7 @@ package com.example.microservicios.microserviciosexample.controller;
 
 import com.example.microservicios.microserviciosexample.Service.UserService;
 import com.example.microservicios.microserviciosexample.model.User;
+import com.example.microservicios.microserviciosexample.model.UserApplicantDTO;
 import com.example.microservicios.microserviciosexample.model.Vacante;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserController {
 
     }
    @GetMapping("/users/{id}")
-    public User findUSer(@PathVariable Long id){
+    public UserApplicantDTO findUSer(@PathVariable Long id){
        return userService.findUSer(id);
    }
     @DeleteMapping("/users/delete/{id}")
@@ -38,6 +39,8 @@ public class UserController {
        userService.editUser(user);
         return "was edited succesfully";
     }
+
+
 
 
 }

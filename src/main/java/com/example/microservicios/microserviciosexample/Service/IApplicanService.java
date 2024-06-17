@@ -1,9 +1,6 @@
 package com.example.microservicios.microserviciosexample.Service;
 
-import com.example.microservicios.microserviciosexample.model.Applicant;
-import com.example.microservicios.microserviciosexample.model.Courses;
-import com.example.microservicios.microserviciosexample.model.Jobs;
-import com.example.microservicios.microserviciosexample.model.Studies;
+import com.example.microservicios.microserviciosexample.model.*;
 
 import java.util.List;
 
@@ -16,7 +13,8 @@ public interface IApplicanService {
 
     public Applicant findApp(Long idApplicant);
 
-    public Applicant editApp(Long idApplicant, Applicant applicant);
+    public Applicant editApp( Applicant applicant);
+    public User getUser(Long idApplicant);
 
     public List<Studies> getStudiesByApplicantId(Long idApplicant);
     public List<Jobs> getJobsByApplicantId(Long idApplicant);

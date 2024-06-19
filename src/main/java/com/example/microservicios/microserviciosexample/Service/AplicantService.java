@@ -176,4 +176,11 @@ public class AplicantService implements  IApplicanService{
     public Applicant saveApplicant(Applicant applicant) {
         return appRepo.save(applicant);
     }
+
+    @Override
+    public List<Vacante> getVacanByApp(Long idApplicant) {
+        Applicant applicant= this.findApp(idApplicant);
+        List<Vacante> vacanteList= applicant.getVacantes();
+        return vacanteList;
+    }
 }

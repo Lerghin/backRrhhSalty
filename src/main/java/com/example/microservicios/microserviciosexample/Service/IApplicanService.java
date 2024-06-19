@@ -22,4 +22,6 @@ public interface IApplicanService {
     public void AppAplicacion(Long idApplicant, Long idVacante);
     public Applicant saveApplicant(Applicant applicant);
 
+    public List<Vacante> getVacanByApp(Long idApplicant);
+
 }

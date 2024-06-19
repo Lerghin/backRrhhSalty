@@ -26,6 +26,11 @@ public class ApplicantController {
         return apliServ.getApplicants();
 
     }
+    @GetMapping("/applicant/vacant/{idApplicant}")
+    public List<Vacante> getVacanByApp(@PathVariable Long idApplicant){
+        return apliServ.getVacanByApp(idApplicant);
+
+    }
     @GetMapping("/applicants/traer/{idApplicant}")
     public  Applicant findApp(@PathVariable Long idApplicant){
         Applicant app= apliServ.findApp(idApplicant);
@@ -110,6 +115,12 @@ public class ApplicantController {
 
             if (applicant == null || vacante == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Applicant or Vacante not found");
+            }
+            for(Vacante vacanteIndex: applicant.getVacantes()){
+                if(vacanteIndex.getId()== vacante.getId()){
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya estas postulado a esta Vacante");
+                }
+
             }
 
             applicant.getVacantes().add(vacante);

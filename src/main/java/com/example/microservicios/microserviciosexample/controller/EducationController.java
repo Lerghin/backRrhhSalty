@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://front-salty-rrhh.vercel.app")
 public class EducationController {
     @Autowired
     private IStudiesService stuServ;

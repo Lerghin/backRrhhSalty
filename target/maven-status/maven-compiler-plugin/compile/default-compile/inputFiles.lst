@@ -5,6 +5,7 @@ C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\
 C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\microserviciosexample\auth\LoginRequest.java
 C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\microserviciosexample\auth\RegisterRequest.java
 C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\microserviciosexample\config\AplicationConfig.java
+C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\microserviciosexample\config\CorsConfig.java
 C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\microserviciosexample\config\CustomPasswordEncoder.java
 C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\microserviciosexample\config\SecurityConfig.java
 C:\Users\Usuario\microserviciosexample\src\main\java\com\example\microservicios\microserviciosexample\controller\ApplicantController.java

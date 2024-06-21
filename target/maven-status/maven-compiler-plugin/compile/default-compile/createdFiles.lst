@@ -25,6 +25,7 @@ com\example\microservicios\microserviciosexample\model\Courses$CoursesBuilder.cl
 com\example\microservicios\microserviciosexample\auth\LoginRequest.class
 com\example\microservicios\microserviciosexample\model\CourseDTO.class
 com\example\microservicios\microserviciosexample\model\UserApplicantDTO.class
+com\example\microservicios\microserviciosexample\config\CorsConfig.class
 com\example\microservicios\microserviciosexample\auth\GlobalExceptionHandler.class
 com\example\microservicios\microserviciosexample\repository\IUserRepository.class
 com\example\microservicios\microserviciosexample\jwt\JwtService.class

@@ -12,7 +12,9 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://front-salty-rrhh.vercel.app")
+
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {

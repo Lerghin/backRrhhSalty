@@ -1,6 +1,7 @@
 package com.example.microservicios.microserviciosexample.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -73,6 +74,7 @@ public class Applicant {
     @OneToMany(mappedBy = "applicant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Courses> coursesList ;
     @OneToOne
+    @JsonIgnore
     private User user;
     @ManyToMany(mappedBy = "aplicantList")
     private List<Vacante> vacantes;

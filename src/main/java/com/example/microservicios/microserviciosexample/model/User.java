@@ -1,6 +1,8 @@
 package com.example.microservicios.microserviciosexample.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +35,7 @@ public class User implements UserDetails {
     private String password;
     @OneToOne
     @JoinColumn(name = "applicant_id")
-    @JsonIgnore()
+    @JsonIgnore
     private Applicant applicant;
 
 
@@ -69,6 +71,7 @@ public class User implements UserDetails {
         return true;
     }
 
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
@@ -82,4 +85,6 @@ public class User implements UserDetails {
     public boolean isEmpty() {
         return false;
     }
+
+
 }

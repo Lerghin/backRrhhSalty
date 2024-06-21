@@ -13,7 +13,7 @@ public interface IApplicanService {
 
     public Applicant findApp(Long idApplicant);
 
-    public Applicant editApp( Applicant applicant);
+
     public User getUser(Long idApplicant);
 
     public List<Studies> getStudiesByApplicantId(Long idApplicant);
@@ -21,6 +21,8 @@ public interface IApplicanService {
     public List<Courses> getCoursesByApplicantId(Long idApplicant);
     public void AppAplicacion(Long idApplicant, Long idVacante);
     public Applicant saveApplicant(Applicant applicant);
+    public Applicant updateApplicant(Long id, ApplicantDto applicantDto);
+    public Applicant editApp( Long idApplicant, Applicant applicant);
 
     public List<Vacante> getVacanByApp(Long idApplicant);
 

@@ -20,7 +20,6 @@ public class Jobs {
 
     private Long idJob;
 
-
     private  String jobName;
 
     @Column(columnDefinition = "TEXT")

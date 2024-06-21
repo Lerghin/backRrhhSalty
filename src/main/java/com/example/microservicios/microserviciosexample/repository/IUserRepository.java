@@ -17,4 +17,5 @@ public interface IUserRepository extends JpaRepository<User, Long> {
     boolean existsByCedula(Integer cedula);
 
 
+   User findByCedula(Integer cedula);
 }

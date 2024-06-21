@@ -5,6 +5,7 @@ import com.example.microservicios.microserviciosexample.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class ApplicantController {
     @Autowired
     private IApplicanService apliServ;
+    private IUserService userService;
 
     @Autowired
     private IVacannteService vacaServ;
@@ -81,6 +83,9 @@ public class ApplicantController {
         try {
 
             Applicant createdApplicant = apliServ.createApplicant(app);
+            User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            createdApplicant.setUser(currentUser);
+            apliServ.saveApplicant(createdApplicant);
             return new ResponseEntity<>(createdApplicant, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al crear el Aplicante: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -97,15 +102,10 @@ public class ApplicantController {
 
     }
 
-    @PutMapping("/app/editar")
-    public ResponseEntity<Applicant> editAplicant( @RequestBody Applicant app) {
-        try {
-            Applicant updatedApplicant = apliServ.editApp( app);
-            return ResponseEntity.ok(updatedApplicant);
-        } catch (RuntimeException e) {
-            // Manejar el error y retornar un ResponseEntity con un mensaje descriptivo
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    @PutMapping("/app/editar/{idApplicant}")
+    public ResponseEntity<Applicant> editApplicant(@PathVariable Long idApplicant, @RequestBody Applicant app) {
+        Applicant updatedApplicant = apliServ.editApp(idApplicant, app);
+        return ResponseEntity.ok(updatedApplicant);
     }
     @PostMapping("/{idApplicant}/apply/{id}")
     public ResponseEntity<String> applyToVacante(@PathVariable Long idApplicant, @PathVariable Long id) {

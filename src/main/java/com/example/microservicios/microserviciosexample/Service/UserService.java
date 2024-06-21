@@ -5,6 +5,7 @@ import com.example.microservicios.microserviciosexample.model.User;
 import com.example.microservicios.microserviciosexample.model.UserApplicantDTO;
 import com.example.microservicios.microserviciosexample.repository.IApplicantRepository;
 import com.example.microservicios.microserviciosexample.repository.IUserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,18 +35,36 @@ public class UserService implements  IUserService {
     @Transactional
     public void deleteUser(Long id) {
 
-       User user = userRepository.findById(id).orElseThrow(null);
-      Applicant app= appRepo.findById(user.getApplicant().getIdApplicant()).orElseThrow(null);
-        app.setUser(null);
-      user.setApplicant(null);
+        // Encuentra el User por su ID, o lanza una excepción si no se encuentra.
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id " + id));
 
-        appRepo.save(app);
-        userRepository.save(user);
+        // Encuentra el Applicant asociado al User.
+        Applicant applicant = user.getApplicant();
 
-            userRepository.delete(user);
-            appRepo.delete(app);
+        // Si el User tiene un Applicant asociado:
+        if (applicant != null) {
+            // Desvincula el User del Applicant.
+            applicant.setUser(null);
+            user.setApplicant(null);
 
+            // Guarda los cambios en ambas entidades para asegurar que la desvinculación se refleje en la base de datos.
+            userRepository.save(user);
+            appRepo.save(applicant);
+
+            // Elimina las referencias en otras tablas antes de eliminar el Applicant.
+            // Este paso es específico y depende de cómo estén modeladas otras entidades.
+            // Ejemplo: vacanteApplicantRepository.deleteByApplicantId(applicant.getIdApplicant());
+
+            // Ahora es seguro eliminar el Applicant.
+            appRepo.delete(applicant);
+        }
+
+        // Elimina el User.
+        userRepository.delete(user);
     }
+
+
 
 
     @Override

@@ -1,3 +1,4 @@
+com\example\microservicios\microserviciosexample\domain\EmailDTO.class
 com\example\microservicios\microserviciosexample\model\Sexo.class
 com\example\microservicios\microserviciosexample\model\Vacante.class
 com\example\microservicios\microserviciosexample\controller\ApplicantController.class
@@ -10,8 +11,10 @@ com\example\microservicios\microserviciosexample\controller\VacanteController.cl
 com\example\microservicios\microserviciosexample\auth\AuthResponse.class
 com\example\microservicios\microserviciosexample\model\StudyDTO.class
 com\example\microservicios\microserviciosexample\auth\GlobalExceptionHandler$InvalidCredentialsException.class
+com\example\microservicios\microserviciosexample\config\MailConfiguration.class
 com\example\microservicios\microserviciosexample\Service\IApplicanService.class
 com\example\microservicios\microserviciosexample\Service\IVacannteService.class
+com\example\microservicios\microserviciosexample\controller\MailController.class
 com\example\microservicios\microserviciosexample\repository\IJobsRepository.class
 com\example\microservicios\microserviciosexample\Service\IUserService.class
 com\example\microservicios\microserviciosexample\controller\CoursesController.class
@@ -38,12 +41,14 @@ com\example\microservicios\microserviciosexample\repository\IApplicantRepository
 com\example\microservicios\microserviciosexample\auth\RegisterRequest.class
 com\example\microservicios\microserviciosexample\model\User$UserBuilder.class
 com\example\microservicios\microserviciosexample\config\SecurityConfig.class
+com\example\microservicios\microserviciosexample\domain\EmailFileDTO.class
 com\example\microservicios\microserviciosexample\Service\ICourseService.class
 com\example\microservicios\microserviciosexample\auth\RegisterRequest$RegisterRequestBuilder.class
 com\example\microservicios\microserviciosexample\model\Studies.class
 com\example\microservicios\microserviciosexample\auth\AuthController.class
 com\example\microservicios\microserviciosexample\Service\IStudiesService.class
 com\example\microservicios\microserviciosexample\Service\AplicantService.class
+com\example\microservicios\microserviciosexample\Service\EmailServiceImpl.class
 com\example\microservicios\microserviciosexample\auth\AuthService.class
 com\example\microservicios\microserviciosexample\model\User.class
 com\example\microservicios\microserviciosexample\Service\VacanteService.class
@@ -53,6 +58,7 @@ com\example\microservicios\microserviciosexample\model\Nationality.class
 com\example\microservicios\microserviciosexample\model\Role.class
 com\example\microservicios\microserviciosexample\repository\IVacantesRepository.class
 com\example\microservicios\microserviciosexample\controller\UserController.class
+com\example\microservicios\microserviciosexample\Service\IEmailService.class
 com\example\microservicios\microserviciosexample\MicroserviciosexampleApplication.class
 com\example\microservicios\microserviciosexample\Service\CourseService.class
 com\example\microservicios\microserviciosexample\auth\AuthResponse$AuthResponseBuilder.class
